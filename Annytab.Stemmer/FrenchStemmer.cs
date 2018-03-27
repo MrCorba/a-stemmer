@@ -352,7 +352,7 @@ namespace Annytab.Stemmer
                     else if (end == "issements" || end == "issement")
                     {
                         // Delete if in R1 and preceded by a non-vowel
-                        if (word.Length > end.Length && strR1.EndsWith(end) && IsVowel(word[word.Length - end.Length - 1]) == false)
+                        if (word.Length > end.Length && strR1.EndsWith(end) && IsConsonant(word[word.Length - end.Length - 1]))
                         {
                             word = word.Remove(word.Length - end.Length);
                             doStep2 = false;
@@ -415,7 +415,7 @@ namespace Annytab.Stemmer
                     string end = this.endingsStep2a[i];
 
                     // Delete if found and preceded by a non-vowel in RV
-                    if (strRV.Length > end.Length && strRV.EndsWith(end) && IsVowel(strRV[strRV.Length - end.Length - 1]) == false)
+                    if (strRV.Length > end.Length && strRV.EndsWith(end) && IsConsonant(strRV[strRV.Length - end.Length - 1]))
                     {
                         word = word.Remove(word.Length - end.Length);
                         doStep2 = false;
@@ -582,7 +582,7 @@ namespace Annytab.Stemmer
                     break;
                 }
 
-                if (IsVowel(chars[i]) == false)
+                if (IsConsonant(chars[i]))
                 {
                     numberOfNonVowels += 1;
                 }
@@ -637,7 +637,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -648,7 +648,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

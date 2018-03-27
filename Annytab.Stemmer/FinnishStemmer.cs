@@ -264,7 +264,7 @@ namespace Annytab.Stemmer
                         char before2 = word.Length > 2 ? word[word.Length - 3] : '\0';
 
                         // Delete if preceded by cv
-                        if (word.Length > 2 && IsVowel(before2) == false && IsVowel(before1))
+                        if (word.Length > 2 && IsConsonant(before2) && IsVowel(before1))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_3 = true;
@@ -421,7 +421,7 @@ namespace Annytab.Stemmer
 
             // b) If R1 ends cX, c a consonant and X one of: a   ä   e   i, delete the last letter
             char c = strR1.Length > 1 ? strR1[strR1.Length - 2] : '\0';
-            if (c != '\0' && IsVowel(c) == false && (strR1.EndsWith("a") || strR1.EndsWith("ä") || strR1.EndsWith("e") || strR1.EndsWith("i")))
+            if (c != '\0' && IsConsonant(c) && (strR1.EndsWith("a") || strR1.EndsWith("ä") || strR1.EndsWith("e") || strR1.EndsWith("i")))
             {
                 word = word.Remove(word.Length - 1);
             }
@@ -449,7 +449,7 @@ namespace Annytab.Stemmer
             for (int i = startIndex; i > -1; i--)
             {
                 // Try to find a double consonant
-                if (i > 0 && word[i] == word[i - 1] && IsVowel(word[i]) == false && IsVowel(word[i - 1]) == false)
+                if (i > 0 && word[i] == word[i - 1] && IsConsonant(word[i]) && IsConsonant(word[i - 1]))
                 {
                     // Get the count of characters that follows the double consonant
                     Int32 count = startIndex - i;
@@ -499,7 +499,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i])& IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -510,7 +510,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

@@ -189,7 +189,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;

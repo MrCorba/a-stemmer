@@ -404,7 +404,7 @@ namespace Annytab.Stemmer
             // But RV is the end of the word if these positions cannot be found.
             if (characters.Length > 3)
             {
-                if (IsVowel(characters[1]) == false)
+                if (IsConsonant(characters[1]))
                 {
                     // Find the next vowel
                     for (int i = 2; i < characters.Length; i++)
@@ -421,14 +421,14 @@ namespace Annytab.Stemmer
                     // Find the next consonant
                     for (int i = 2; i < characters.Length; i++)
                     {
-                        if (IsVowel(characters[i]) == false)
+                        if (IsConsonant(characters[i]))
                         {
                             rV = i + 1;
                             break;
                         }
                     }
                 }
-                else if (IsVowel(characters[0]) == false && IsVowel(characters[1]))
+                else if (IsConsonant(characters[0]) && IsVowel(characters[1]))
                 {
                     rV = 3;
                 }
@@ -437,7 +437,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -448,7 +448,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

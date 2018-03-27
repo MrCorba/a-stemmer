@@ -9,6 +9,7 @@ namespace Annytab.Stemmer
     {
         string[] GetSteamWords(string[] words);
         string GetSteamWord(string word);
+        bool IsConsonant(char character);
         bool IsVowel(char character);
         bool IsShortSyllable(char[] characters, Int32 index);
         bool IsShortWord(string word, string strR1);
