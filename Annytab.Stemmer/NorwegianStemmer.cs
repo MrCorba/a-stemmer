@@ -29,7 +29,7 @@ namespace Annytab.Stemmer
             // Set values for instance variables
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'y', 'æ', 'å', 'ø' };
             this.valid_s_endings = new char[] { 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'l', 'm', 'n', 'o', 'p', 'r', 't', 'v', 'y', 'z' }; // or k not preceded by a vowel
-            this.endingsStep1 = new string[] { "hetenes", "hetens", "hetene", "heter", "heten", "endes", "edes", "enes", "ande", "ende", "ane", "ene", 
+            this.endingsStep1 = new string[] { "hetenes", "hetens", "hetene", "heter", "heten", "endes", "edes", "enes", "ande", "ende", "ane", "ene",
                 "ens", "ers", "ets", "het", "ast", "ede", "en", "ar", "er", "et", "as", "es", "a", "e" };
             this.endingsStep2 = new string[] { "dt", "vt" };
             this.endingsStep3 = new string[] { "hetslov", "eleg", "elov", "slov", "elig", "lig", "els", "leg", "eig", "lov", "ig" };
@@ -110,7 +110,7 @@ namespace Annytab.Stemmer
             }
 
             // Delete a s in the end if the s is preceded by a valid s-ending, 
-            if (continue_step_1 == true && part2.EndsWith("s") == true)
+            if (continue_step_1 && part2.EndsWith("s"))
             {
                 // Create a full string of part1 and part2
                 word = part1 + part2;
@@ -143,7 +143,7 @@ namespace Annytab.Stemmer
                             break;
                         }
                     }
-                }     
+                }
             }
             else
             {
@@ -151,13 +151,13 @@ namespace Annytab.Stemmer
             }
 
             // Check for an erte or an ert ending
-            if(continue_step_1 == true)
+            if (continue_step_1)
             {
-                if (part2.EndsWith("erte") == true)
+                if (part2.EndsWith("erte"))
                 {
                     part2 = part2.Remove(part2.Length - 2);
                 }
-                else if (part2.EndsWith("ert") == true)
+                else if (part2.EndsWith("ert"))
                 {
                     part2 = part2.Remove(part2.Length - 1);
                 }
@@ -213,7 +213,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;

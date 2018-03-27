@@ -32,18 +32,18 @@ namespace Annytab.Stemmer
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'à', 'è', 'ì', 'ò', 'ù' };
             this.acuteAccents = new char[] { 'á', 'é', 'í', 'ó', 'ú' };
             this.graveAccents = new char[] { 'à', 'è', 'ì', 'ò', 'ù' };
-            this.endingsStep0 = new string[] { "gliela", "gliele", "glieli", "glielo", "gliene", "mele", "celo", "celi", "cele", "cela", 
-                "tene", "telo", "teli", "tele", "tela", "mene", "melo", "meli", "vene", "mela", "cene", "vela", "vele", "veli", "velo", 
+            this.endingsStep0 = new string[] { "gliela", "gliele", "glieli", "glielo", "gliene", "mele", "celo", "celi", "cele", "cela",
+                "tene", "telo", "teli", "tele", "tela", "mene", "melo", "meli", "vene", "mela", "cene", "vela", "vele", "veli", "velo",
                 "sene", "gli", "vi", "ti", "si", "ne", "la", "lo", "li", "le", "ci", "mi" };
-            this.endingsStep1 = new string[] { "atrice", "usione", "uzioni", "uzione", "azione", "amente", "imenti", "imento", "amenti", 
-                "amento", "azioni", "atrici", "usioni", "abile", "abili", "ibile", "ibili", "logie", "logia", "atori", "atore", "mente", "anti", 
-                "ante", "enza", "anze", "enze", "ichi", "iche", "anza", "ismi", "istì", "istè", "istà", "isti", "iste", "ista", "ismo", "ose", "osa", 
+            this.endingsStep1 = new string[] { "atrice", "usione", "uzioni", "uzione", "azione", "amente", "imenti", "imento", "amenti",
+                "amento", "azioni", "atrici", "usioni", "abile", "abili", "ibile", "ibili", "logie", "logia", "atori", "atore", "mente", "anti",
+                "ante", "enza", "anze", "enze", "ichi", "iche", "anza", "ismi", "istì", "istè", "istà", "isti", "iste", "ista", "ismo", "ose", "osa",
                 "osi", "oso", "ità", "ivo", "ico", "iva", "ice", "ica", "ici", "ive", "ivi" };
-            this.endingsStep2 = new string[] { "irebbero", "erebbero", "eresti", "assimo", "iscono", "iranno", "iresti", "eranno", "erebbe", "essero", 
-                "iscano", "ireste", "assero", "eremmo", "irebbe", "ereste", "iremmo", "issero", "avamo", "avano", "avate", "ivate", "ivano", "ivamo", 
-                "eremo", "iremo", "erete", "erono", "evamo", "irono", "evano", "irete", "evate", "arono", "endi", "irei", "irai", "ende", "immo", "iamo", 
-                "Yamo", "erei", "enda", "ando", "emmo", "isca", "ammo", "asse", "isce", "isci", "erai", "isco", "assi", "endo", "erà", "irà", "evo", 
-                "evi", "irò", "eva", "ete", "erò", "ita", "ite", "iti", "ito", "iva", "ivi", "ere", "ivo", "ano", "avo", "avi", "ono", "uta", "ute", 
+            this.endingsStep2 = new string[] { "irebbero", "erebbero", "eresti", "assimo", "iscono", "iranno", "iresti", "eranno", "erebbe", "essero",
+                "iscano", "ireste", "assero", "eremmo", "irebbe", "ereste", "iremmo", "issero", "avamo", "avano", "avate", "ivate", "ivano", "ivamo",
+                "eremo", "iremo", "erete", "erono", "evamo", "irono", "evano", "irete", "evate", "arono", "endi", "irei", "irai", "ende", "immo", "iamo",
+                "Yamo", "erei", "enda", "ando", "emmo", "isca", "ammo", "asse", "isce", "isci", "erai", "isco", "assi", "endo", "erà", "irà", "evo",
+                "evi", "irò", "eva", "ete", "erò", "ita", "ite", "iti", "ito", "iva", "ivi", "ere", "ivo", "ano", "avo", "avi", "ono", "uta", "ute",
                 "ava", "ato", "ati", "ate", "ata", "uti", "uto", "ire", "are", "ar", "ir" };
             this.endingsStep3a = new string[] { "a", "e", "i", "o", "à", "è", "ì", "ò" };
 
@@ -88,11 +88,11 @@ namespace Annytab.Stemmer
             char[] chars = word.ToCharArray();
 
             // Replace all acute accents by grave accents
-            for(int i = 0; i < chars.Length; i++)
+            for (int i = 0; i < chars.Length; i++)
             {
-                for(int j = 0; j < this.acuteAccents.Length; j++)
+                for (int j = 0; j < this.acuteAccents.Length; j++)
                 {
-                    if(chars[i] == this.acuteAccents[j])
+                    if (chars[i] == this.acuteAccents[j])
                     {
                         chars[i] = this.graveAccents[j];
                     }
@@ -108,13 +108,13 @@ namespace Annytab.Stemmer
                     if (chars[i] == 'u' && chars[i - 1] == 'q')
                     {
                         chars[i] = 'U';
-                    } 
+                    }
                 }
-                else if (chars[i] == 'u' && ((IsVowel(chars[i - 1]) == true && IsVowel(chars[i + 1]) == true) || chars[i - 1] == 'q'))
+                else if (chars[i] == 'u' && ((IsVowel(chars[i - 1]) && IsVowel(chars[i + 1])) || chars[i - 1] == 'q'))
                 {
                     chars[i] = 'U';
                 }
-                else if (chars[i] == 'i' && IsVowel(chars[i - 1]) == true && IsVowel(chars[i + 1]) == true)
+                else if (chars[i] == 'i' && IsVowel(chars[i - 1]) && IsVowel(chars[i + 1]))
                 {
                     chars[i] = 'I';
                 }
@@ -138,16 +138,16 @@ namespace Annytab.Stemmer
             {
                 // Get the ending
                 string end = this.endingsStep0[i];
-                
+
                 // Check if word ends with some of the predefined step 0 endings
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
-                    if (strRV.EndsWith("ando" + end) == true || strRV.EndsWith("endo" + end) == true)
+                    if (strRV.EndsWith("ando" + end) || strRV.EndsWith("endo" + end))
                     {
                         // (a) Delete the suffix
                         word = word.Remove(word.Length - end.Length);
                     }
-                    else if (strRV.EndsWith("ar" + end) == true || strRV.EndsWith("er" + end) == true || strRV.EndsWith("ir" + end) == true)
+                    else if (strRV.EndsWith("ar" + end) || strRV.EndsWith("er" + end) || strRV.EndsWith("ir" + end))
                     {
                         // (b) Replace the suffix with e
                         word = word.Remove(word.Length - end.Length);
@@ -174,18 +174,18 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep1[i];
 
                 // Check if word ends with some of the predefined step 1 endings
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
                     if (end == "azione" || end == "azioni" || end == "atore" || end == "atori")
                     {
                         // Delete if in R2
-                        if (strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by ic, delete if in R2
-                            if(strR2.EndsWith("ic" + end) == true)
+                            if (strR2.EndsWith("ic" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -194,7 +194,7 @@ namespace Annytab.Stemmer
                     else if (end == "logia" || end == "logie")
                     {
                         // Replace with log if in R2
-                        if (strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "log";
@@ -204,17 +204,17 @@ namespace Annytab.Stemmer
                     else if (end == "uzione" || end == "uzioni" || end == "usione" || end == "usioni")
                     {
                         // Replace with u if in R2 
-                        if (strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "u";
                             ending_removed_step_1 = true;
-                        } 
+                        }
                     }
                     else if (end == "enza" || end == "enze")
                     {
                         // Replace with ente if in R2 
-                        if (strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "ente";
@@ -224,7 +224,7 @@ namespace Annytab.Stemmer
                     else if (end == "amento" || end == "amenti" || end == "imento" || end == "imenti")
                     {
                         // Delete if in RV
-                        if(strRV.EndsWith(end) == true)
+                        if (strRV.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
@@ -233,24 +233,24 @@ namespace Annytab.Stemmer
                     else if (end == "amente")
                     {
                         // Delete if in R1
-                        if (strR1.EndsWith(end) == true)
+                        if (strR1.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by iv, delete if in R2 (and if further preceded by at, delete if in R2)
                             // If preceded by os, ic or abil, delete if in R2 
-                            if (strR2.EndsWith("iv" + end) == true || strR2.EndsWith("os" + end) == true ||
-                                strR2.EndsWith("ic" + end) == true)
+                            if (strR2.EndsWith("iv" + end) || strR2.EndsWith("os" + end) ||
+                                strR2.EndsWith("ic" + end))
                             {
                                 word = word.Remove(word.Length - 2);
 
-                                if (strR2.EndsWith("ativ" + end) == true)
+                                if (strR2.EndsWith("ativ" + end))
                                 {
                                     word = word.Remove(word.Length - 2);
                                 }
                             }
-                            else if (strR2.EndsWith("abil" + end) == true)
+                            else if (strR2.EndsWith("abil" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -259,17 +259,17 @@ namespace Annytab.Stemmer
                     else if (end == "ità")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by abil, ic or iv, delete if in R2
-                            if(strR2.EndsWith("abil" + end) == true)
+                            if (strR2.EndsWith("abil" + end))
                             {
                                 word = word.Remove(word.Length - 4);
                             }
-                            else if (strR2.EndsWith("ic" + end) == true || strR2.EndsWith("iv" + end) == true)
+                            else if (strR2.EndsWith("ic" + end) || strR2.EndsWith("iv" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -278,17 +278,17 @@ namespace Annytab.Stemmer
                     else if (end == "ivo" || end == "ivi" || end == "iva" || end == "ive")
                     {
                         // Delete if in R2
-                        if (strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by at, delete if in R2 (and if further preceded by ic, delete if in R2)
-                            if (strR2.EndsWith("at" + end) == true)
+                            if (strR2.EndsWith("at" + end))
                             {
                                 word = word.Remove(word.Length - 2);
 
-                                if(strR2.EndsWith("icat" + end) == true)
+                                if (strR2.EndsWith("icat" + end))
                                 {
                                     word = word.Remove(word.Length - 2);
                                 }
@@ -298,7 +298,7 @@ namespace Annytab.Stemmer
                     else
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
@@ -318,7 +318,7 @@ namespace Annytab.Stemmer
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
             strRV = partIndexR[2] < word.Length ? word.Substring(partIndexR[2]) : "";
 
-            if(ending_removed_step_1 == false)
+            if (ending_removed_step_1 == false)
             {
                 for (int i = 0; i < this.endingsStep2.Length; i++)
                 {
@@ -326,7 +326,7 @@ namespace Annytab.Stemmer
                     string end = this.endingsStep2[i];
 
                     // Delete if in RV
-                    if (strRV.EndsWith(end) == true)
+                    if (strRV.EndsWith(end))
                     {
                         word = word.Remove(word.Length - end.Length);
                         break;
@@ -349,12 +349,12 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep3a[i];
 
                 // Delete a final a, e, i, o, à, è, ì or ò if it is in RV
-                if (strRV.EndsWith(end) == true)
+                if (strRV.EndsWith(end))
                 {
                     word = word.Remove(word.Length - end.Length);
 
                     // Delete a preceding i if it is in RV
-                    if(strRV.EndsWith("i" + end) == true)
+                    if (strRV.EndsWith("i" + end))
                     {
                         word = word.Remove(word.Length - 1);
                     }
@@ -368,7 +368,7 @@ namespace Annytab.Stemmer
             strRV = partIndexR[2] < word.Length ? word.Substring(partIndexR[2]) : "";
 
             // (b)
-            if (strRV.EndsWith("ch") == true || strRV.EndsWith("gh") == true)
+            if (strRV.EndsWith("ch") || strRV.EndsWith("gh"))
             {
                 word = word.Remove(word.Length - 1);
             }
@@ -409,35 +409,35 @@ namespace Annytab.Stemmer
                     // Find the next vowel
                     for (int i = 2; i < characters.Length; i++)
                     {
-                        if (IsVowel(characters[i]) == true)
+                        if (IsVowel(characters[i]))
                         {
                             rV = i + 1;
                             break;
                         }
                     }
                 }
-                else if (IsVowel(characters[0]) == true && IsVowel(characters[1]) == true)
+                else if (IsVowel(characters[0]) && IsVowel(characters[1]))
                 {
                     // Find the next consonant
                     for (int i = 2; i < characters.Length; i++)
                     {
-                        if(IsVowel(characters[i]) == false)
+                        if (IsVowel(characters[i]) == false)
                         {
                             rV = i + 1;
                             break;
                         }
                     }
                 }
-                else if (IsVowel(characters[0]) == false && IsVowel(characters[1]) == true)
+                else if (IsVowel(characters[0]) == false && IsVowel(characters[1]))
                 {
                     rV = 3;
                 }
             }
-            
+
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -448,7 +448,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

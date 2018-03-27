@@ -29,9 +29,9 @@ namespace Annytab.Stemmer
             // Set values for instance variables
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'y', 'æ', 'å', 'ø' };
             this.valid_s_endings = new char[] { 'a', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 't', 'v', 'y', 'z', 'å' };
-            this.endingsStep1 = new string[] { "erendes", "hedens", "erende", "erede", "ethed", "heden", "erens", "heder", "endes", "ernes", "erets", 
-                "eret", "eren", "erer", "ered", "ende", "heds", "erne", "eres", "enes", "ens", "ets", "ere", "hed", "ene", "ers", "et", "er", "en", 
-                "es", "e" };  
+            this.endingsStep1 = new string[] { "erendes", "hedens", "erende", "erede", "ethed", "heden", "erens", "heder", "endes", "ernes", "erets",
+                "eret", "eren", "erer", "ered", "ende", "heds", "erne", "eres", "enes", "ens", "ets", "ere", "hed", "ene", "ers", "et", "er", "en",
+                "es", "e" };
             this.endingsStep2 = new string[] { "gd", "dt", "gt", "kt" };
             this.endingsStep3 = new string[] { "elig", "els", "lig", "ig" };
 
@@ -111,7 +111,7 @@ namespace Annytab.Stemmer
             }
 
             // Delete a s in the end if the s is preceded by a valid s-ending
-            if (continue_step_1 == true && part2.EndsWith("s") == true)
+            if (continue_step_1 && part2.EndsWith("s"))
             {
                 // Create a full string of part1 and part2
                 word = part1 + part2;
@@ -167,7 +167,7 @@ namespace Annytab.Stemmer
                 }
             }
 
-            if(repeatStep2 == true)
+            if (repeatStep2)
             {
                 for (int i = 0; i < this.endingsStep2.Length; i++)
                 {
@@ -189,7 +189,7 @@ namespace Annytab.Stemmer
             // **********************************************
             // If the word ends with double consonant in R1, remove one of the consonants.
             word = part1 + part2;
-            if (word.Length > 1 && part2.Length > 0 && word[word.Length - 2] == word[word.Length - 1] 
+            if (word.Length > 1 && part2.Length > 0 && word[word.Length - 2] == word[word.Length - 1]
                 && IsVowel(part2[part2.Length - 1]) == false)
             {
                 part2 = part2.Remove(part2.Length - 1);
@@ -218,7 +218,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;

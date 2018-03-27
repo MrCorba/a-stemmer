@@ -32,17 +32,17 @@ namespace Annytab.Stemmer
             // Set values for instance variables
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'ü' };
             this.endingsStep0 = new string[] { "selas", "selos", "sela", "selo", "nos", "los", "les", "las", "se", "le", "lo", "me", "la" };
-            this.endingsStep1 = new string[] { "amientos", "imientos", "imiento", "amiento", "uciones", "aciones", "adoras", "adores", "idades", 
-                "amente", "encias", "ancias", "logías", "ución", "encia", "ancia", "antes", "mente", "istas", "ibles", "ables", "ación", "anzas", "adora", 
-                "ismos", "logía", "ivos", "ante", "osas", "osos", "ismo", "icas", "idad", "ista", "icos", "ible", "anza", "able", "ivas", "ador", "osa", 
+            this.endingsStep1 = new string[] { "amientos", "imientos", "imiento", "amiento", "uciones", "aciones", "adoras", "adores", "idades",
+                "amente", "encias", "ancias", "logías", "ución", "encia", "ancia", "antes", "mente", "istas", "ibles", "ables", "ación", "anzas", "adora",
+                "ismos", "logía", "ivos", "ante", "osas", "osos", "ismo", "icas", "idad", "ista", "icos", "ible", "anza", "able", "ivas", "ador", "osa",
                 "oso", "iva", "ivo", "ica", "ico" };
             this.endingsStep2a = new string[] { "yamos", "yendo", "yeron", "yais", "yes", "yas", "yan", "yen", "ye", "yó", "ya", "yo" };
-            this.endingsStep2b = new string[] { "iésemos", "iéramos", "iríamos", "eríamos", "aríamos", "aremos", "ábamos", "iríais", "aríais", 
-                "ásemos", "isteis", "asteis", "ieseis", "eremos", "ierais", "áramos", "iremos", "eríais", "arías", "aréis", "aseis", "arais", 
-                "íamos", "abais", "iesen", "erían", "ieses", "ieran", "ieras", "eréis", "arían", "irían", "irías", "iréis", "iendo", "ieron", 
-                "erías", "irás", "aron", "irán", "asen", "ando", "aran", "aría", "aban", "abas", "iste", "idos", "iese", "arás", "adas", "idas", 
-                "arán", "iera", "ería", "aras", "erás", "erán", "ases", "amos", "imos", "emos", "aste", "íais", "iría", "ados", "iré", "ido", "ían", 
-                "ado", "aré", "ase", "ará", "áis", "eré", "ara", "erá", "ida", "ada", "aba", "éis", "irá", "ías", "an", "es", "id", "ed", "ad", "ía", 
+            this.endingsStep2b = new string[] { "iésemos", "iéramos", "iríamos", "eríamos", "aríamos", "aremos", "ábamos", "iríais", "aríais",
+                "ásemos", "isteis", "asteis", "ieseis", "eremos", "ierais", "áramos", "iremos", "eríais", "arías", "aréis", "aseis", "arais",
+                "íamos", "abais", "iesen", "erían", "ieses", "ieran", "ieras", "eréis", "arían", "irían", "irías", "iréis", "iendo", "ieron",
+                "erías", "irás", "aron", "irán", "asen", "ando", "aran", "aría", "aban", "abas", "iste", "idos", "iese", "arás", "adas", "idas",
+                "arán", "iera", "ería", "aras", "erás", "erán", "ases", "amos", "imos", "emos", "aste", "íais", "iría", "ados", "iré", "ido", "ían",
+                "ado", "aré", "ase", "ará", "áis", "eré", "ara", "erá", "ida", "ada", "aba", "éis", "irá", "ías", "an", "es", "id", "ed", "ad", "ía",
                 "ís", "ar", "er", "ir", "as", "en", "ió" };
             this.endingsStep3 = new string[] { "os", "a", "o", "á", "í", "ó", "e", "é" };
             this.acuteAccents = new string[] { "á", "é", "í", "ó", "ú" };
@@ -100,48 +100,48 @@ namespace Annytab.Stemmer
             {
                 // Get the ending
                 string end = this.endingsStep0[i];
-                
+
                 // Check if word ends with some of the predefined step 0 endings
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
-                    if (strRV.EndsWith("iéndo" + end) == true)
+                    if (strRV.EndsWith("iéndo" + end))
                     {
                         // Deletion is followed by removing the acute accent (for example, haciéndola -> haciendo)
                         word = word.Remove(word.Length - end.Length - 5);
                         word += "iendo";
                     }
-                    else if (strRV.EndsWith("ándo" + end) == true)
+                    else if (strRV.EndsWith("ándo" + end))
                     {
                         // Deletion is followed by removing the acute accent (for example, haciéndola -> haciendo)
                         word = word.Remove(word.Length - end.Length - 4);
                         word += "ando";
                     }
-                    else if (strRV.EndsWith("ár" + end) == true)
+                    else if (strRV.EndsWith("ár" + end))
                     {
                         // Deletion is followed by removing the acute accent (for example, haciéndola -> haciendo)
                         word = word.Remove(word.Length - end.Length - 2);
                         word += "ar";
                     }
-                    else if (strRV.EndsWith("ér" + end) == true)
+                    else if (strRV.EndsWith("ér" + end))
                     {
                         // Deletion is followed by removing the acute accent (for example, haciéndola -> haciendo)
                         word = word.Remove(word.Length - end.Length - 2);
                         word += "er";
                     }
-                    else if (strRV.EndsWith("ír" + end) == true)
+                    else if (strRV.EndsWith("ír" + end))
                     {
                         // Deletion is followed by removing the acute accent (for example, haciéndola -> haciendo)
                         word = word.Remove(word.Length - end.Length - 2);
                         word += "ir";
                     }
-                    else if (strRV.EndsWith("iendo" + end) == true || strRV.EndsWith("ando" + end) == true ||
-                        strRV.EndsWith("ar" + end) == true || strRV.EndsWith("er" + end) == true ||
-                        strRV.EndsWith("ir" + end) == true)
+                    else if (strRV.EndsWith("iendo" + end) || strRV.EndsWith("ando" + end) ||
+                        strRV.EndsWith("ar" + end) || strRV.EndsWith("er" + end) ||
+                        strRV.EndsWith("ir" + end))
                     {
                         // Delete the ending
                         word = word.Remove(word.Length - end.Length);
                     }
-                    else if (strRV.EndsWith("yendo" + end) == true && word.EndsWith("uyendo" + end) == true)
+                    else if (strRV.EndsWith("yendo" + end) && word.EndsWith("uyendo" + end))
                     {
                         // Delete the ending
                         word = word.Remove(word.Length - end.Length);
@@ -167,31 +167,31 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep1[i];
 
                 // Check if word ends with some of the predefined step 1 endings
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
-                    if (end == "anza" || end == "anzas" || end == "ico" || end == "ica" || end == "icos" || end == "icas" || 
-                        end == "ismo" || end == "ismos" || end == "able" || end == "ables" || end == "ible" || end == "ibles" || 
-                        end == "ista" || end == "istas" || end == "oso" || end == "osa" || end == "osos" || end == "osas" || 
+                    if (end == "anza" || end == "anzas" || end == "ico" || end == "ica" || end == "icos" || end == "icas" ||
+                        end == "ismo" || end == "ismos" || end == "able" || end == "ables" || end == "ible" || end == "ibles" ||
+                        end == "ista" || end == "istas" || end == "oso" || end == "osa" || end == "osos" || end == "osas" ||
                         end == "amiento" || end == "amientos" || end == "imiento" || end == "imientos")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
                         }
                     }
-                    else if (end == "adora" || end == "ador" || end == "ación" || end == "adoras" || end == "adores" || 
+                    else if (end == "adora" || end == "ador" || end == "ación" || end == "adoras" || end == "adores" ||
                         end == "aciones" || end == "ante" || end == "antes" || end == "ancia" || end == "ancias")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by ic, delete if in R2
-                            if(strR2.EndsWith("ic" + end) == true)
+                            if (strR2.EndsWith("ic" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -200,7 +200,7 @@ namespace Annytab.Stemmer
                     else if (end == "logía" || end == "logías")
                     {
                         // Replace with log if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "log";
@@ -210,7 +210,7 @@ namespace Annytab.Stemmer
                     else if (end == "ución" || end == "uciones")
                     {
                         // Replace with u if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "u";
@@ -220,7 +220,7 @@ namespace Annytab.Stemmer
                     else if (end == "encia" || end == "encias")
                     {
                         // Replace with ente if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             word += "ente";
@@ -230,19 +230,19 @@ namespace Annytab.Stemmer
                     else if (end == "amente")
                     {
                         // Delete if in R1
-                        if(strR1.EndsWith(end) == true)
+                        if (strR1.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by iv, delete if in R2 (and if further preceded by at, delete if in R2)
                             // If preceded by os, ic or ad, delete if in R2
-                            if(strR2.EndsWith("iv" + end) == true || strR2.EndsWith("os" + end) == true || 
-                                strR2.EndsWith("ic" + end) == true || strR2.EndsWith("ad" + end) == true)
+                            if (strR2.EndsWith("iv" + end) || strR2.EndsWith("os" + end) ||
+                                strR2.EndsWith("ic" + end) || strR2.EndsWith("ad" + end))
                             {
                                 word = word.Remove(word.Length - 2);
 
-                                if(strR2.EndsWith("ativ" + end) == true)
+                                if (strR2.EndsWith("ativ" + end))
                                 {
                                     word = word.Remove(word.Length - 2);
                                 }
@@ -252,14 +252,14 @@ namespace Annytab.Stemmer
                     else if (end == "mente")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by ante, able or ible, delete if in R2
-                            if (strR2.EndsWith("ante" + end) == true || strR2.EndsWith("able" + end) == true ||
-                                strR2.EndsWith("ible" + end) == true)
+                            if (strR2.EndsWith("ante" + end) || strR2.EndsWith("able" + end) ||
+                                strR2.EndsWith("ible" + end))
                             {
                                 word = word.Remove(word.Length - 4);
                             }
@@ -268,17 +268,17 @@ namespace Annytab.Stemmer
                     else if (end == "idades" || end == "idad")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by abil, ic or iv, delete if in R2
-                            if(strR2.EndsWith("abil" + end) == true)
+                            if (strR2.EndsWith("abil" + end))
                             {
                                 word = word.Remove(word.Length - 4);
                             }
-                            else if (strR2.EndsWith("ic" + end) == true || strR2.EndsWith("iv" + end) == true)
+                            else if (strR2.EndsWith("ic" + end) || strR2.EndsWith("iv" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -287,13 +287,13 @@ namespace Annytab.Stemmer
                     else if (end == "ivos" || end == "ivas" || end == "iva" || end == "ivo")
                     {
                         // Delete if in R2
-                        if(strR2.EndsWith(end) == true)
+                        if (strR2.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_1 = true;
 
                             // If preceded by at, delete if in R2
-                            if(strR2.EndsWith("at" + end) == true)
+                            if (strR2.EndsWith("at" + end))
                             {
                                 word = word.Remove(word.Length - 2);
                             }
@@ -301,7 +301,7 @@ namespace Annytab.Stemmer
                     }
 
                     // Break out from the loop if a ending has been removed
-                    if (ending_removed_step_1 == true)
+                    if (ending_removed_step_1)
                     {
                         break;
                     }
@@ -318,7 +318,7 @@ namespace Annytab.Stemmer
 
             // (a)
             bool do_step_2b = true;
-            if(ending_removed_step_1 == false)
+            if (ending_removed_step_1 == false)
             {
                 for (int i = 0; i < this.endingsStep2a.Length; i++)
                 {
@@ -326,10 +326,10 @@ namespace Annytab.Stemmer
                     string end = this.endingsStep2a[i];
 
                     // Check if the ending can be found
-                    if (word.EndsWith(end) == true)
+                    if (word.EndsWith(end))
                     {
                         // Delete if in RV and preceded by u
-                        if(strRV.EndsWith(end) == true && word.EndsWith("u" + end) == true)
+                        if (strRV.EndsWith(end) && word.EndsWith("u" + end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             do_step_2b = false;
@@ -340,7 +340,7 @@ namespace Annytab.Stemmer
             }
 
             // (b)
-            if (ending_removed_step_1 == false && do_step_2b == true)
+            if (ending_removed_step_1 == false && do_step_2b)
             {
                 for (int i = 0; i < this.endingsStep2b.Length; i++)
                 {
@@ -348,17 +348,17 @@ namespace Annytab.Stemmer
                     string end = this.endingsStep2b[i];
 
                     // Check if the ending can be found
-                    if (word.EndsWith(end) == true)
+                    if (word.EndsWith(end))
                     {
                         if (end == "en" || end == "es" || end == "éis" || end == "emos")
                         {
                             // Delete, and if preceded by gu delete the u (the gu need not be in RV)
-                            if (strRV.EndsWith(end) == true)
+                            if (strRV.EndsWith(end))
                             {
                                 word = word.Remove(word.Length - end.Length);
 
                                 // If preceded by gu delete the u (the gu need not be in RV)
-                                if (word.EndsWith("gu") == true)
+                                if (word.EndsWith("gu"))
                                 {
                                     word = word.Remove(word.Length - 1);
                                 }
@@ -369,7 +369,7 @@ namespace Annytab.Stemmer
                         else
                         {
                             // Delete if in RV
-                            if (strRV.EndsWith(end) == true)
+                            if (strRV.EndsWith(end))
                             {
                                 word = word.Remove(word.Length - end.Length);
                                 break;
@@ -393,17 +393,17 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep3[i];
 
                 // Check if the ending can be found
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
-                    if(end == "é" || end == "e")
+                    if (end == "é" || end == "e")
                     {
                         // Delete if in RV
-                        if(strRV.EndsWith(end) == true)
+                        if (strRV.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
 
                             // If preceded by gu with the u in RV delete the u
-                            if(strRV.EndsWith("u" + end) == true && word.EndsWith("gu") == true)
+                            if (strRV.EndsWith("u" + end) && word.EndsWith("gu"))
                             {
                                 word = word.Remove(word.Length - 1);
                             }
@@ -414,7 +414,7 @@ namespace Annytab.Stemmer
                     else
                     {
                         // Delete if in RV
-                        if(strRV.EndsWith(end) == true)
+                        if (strRV.EndsWith(end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             break;
@@ -468,35 +468,35 @@ namespace Annytab.Stemmer
                     // Find the next vowel
                     for (int i = 2; i < characters.Length; i++)
                     {
-                        if (IsVowel(characters[i]) == true)
+                        if (IsVowel(characters[i]))
                         {
                             rV = i + 1;
                             break;
                         }
                     }
                 }
-                else if (IsVowel(characters[0]) == true && IsVowel(characters[1]) == true)
+                else if (IsVowel(characters[0]) && IsVowel(characters[1]))
                 {
                     // Find the next consonant
                     for (int i = 2; i < characters.Length; i++)
                     {
-                        if(IsVowel(characters[i]) == false)
+                        if (IsVowel(characters[i]) == false)
                         {
                             rV = i + 1;
                             break;
                         }
                     }
                 }
-                else if (IsVowel(characters[0]) == false && IsVowel(characters[1]) == true)
+                else if (IsVowel(characters[0]) == false && IsVowel(characters[1]))
                 {
                     rV = 3;
                 }
             }
-            
+
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -507,7 +507,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

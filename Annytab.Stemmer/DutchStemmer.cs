@@ -28,7 +28,7 @@ namespace Annytab.Stemmer
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'y', 'è' };
             this.acuteUmlautAccents = new char[] { 'ä', 'ë', 'ï', 'ö', 'ü', 'á', 'é', 'í', 'ó', 'ú' };
             this.accentReplacements = new char[] { 'a', 'e', 'i', 'o', 'u', 'a', 'e', 'i', 'o', 'u' };
-            
+
         } // End of the constructor
 
         #endregion
@@ -94,16 +94,16 @@ namespace Annytab.Stemmer
                 }
                 else if (i == charCount)
                 {
-                    if (chars[i] == 'y' && IsVowel(chars[i - 1]) == true)
+                    if (chars[i] == 'y' && IsVowel(chars[i - 1]))
                     {
                         chars[i] = 'Y';
                     }
                 }
-                else if (chars[i] == 'i' && IsVowel(chars[i - 1]) == true && IsVowel(chars[i + 1]) == true)
+                else if (chars[i] == 'i' && IsVowel(chars[i - 1]) && IsVowel(chars[i + 1]))
                 {
                     chars[i] = 'I';
                 }
-                else if (chars[i] == 'y' && IsVowel(chars[i - 1]) == true)
+                else if (chars[i] == 'y' && IsVowel(chars[i - 1]))
                 {
                     chars[i] = 'Y';
                 }
@@ -122,20 +122,20 @@ namespace Annytab.Stemmer
             // **********************************************
             // Step 1
             // **********************************************
-            if(word.EndsWith("heden") == true)
+            if (word.EndsWith("heden"))
             {
                 // Replace with heid if in R1
-                if (strR1.EndsWith("heden") == true)
+                if (strR1.EndsWith("heden"))
                 {
                     // Replace with heid if in R1
                     word = word.Remove(word.Length - 5);
                     word += "heid";
                 }
             }
-            else if (word.EndsWith("ene") == true)
+            else if (word.EndsWith("ene"))
             {
                 // Delete if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("ene") == true && word.Length > 3 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 4]) == false)
+                if (strR1.EndsWith("ene") && word.Length > 3 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 4]) == false)
                 {
                     word = word.Remove(word.Length - 3);
 
@@ -143,10 +143,10 @@ namespace Annytab.Stemmer
                     word = UndoubleEnding(word);
                 }
             }
-            else if (word.EndsWith("en") == true)
+            else if (word.EndsWith("en"))
             {
                 // Delete if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("en") == true && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("en") && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
                 {
                     word = word.Remove(word.Length - 2);
 
@@ -154,18 +154,18 @@ namespace Annytab.Stemmer
                     word = UndoubleEnding(word);
                 }
             }
-            else if (word.EndsWith("se") == true)
+            else if (word.EndsWith("se"))
             {
                 // Delete if in R1 and preceded by a valid s-ending
-                if (strR1.EndsWith("se") == true && word.Length > 2 && word[word.Length - 3] != 'j' && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("se") && word.Length > 2 && word[word.Length - 3] != 'j' && IsVowel(word[word.Length - 3]) == false)
                 {
                     word = word.Remove(word.Length - 2);
                 }
             }
-            else if (word.EndsWith("s") == true)
+            else if (word.EndsWith("s"))
             {
                 // Delete if in R1 and preceded by a valid s-ending
-                if (strR1.EndsWith("s") == true && word.Length > 1 && word[word.Length - 2] != 'j' && IsVowel(word[word.Length - 2]) == false)
+                if (strR1.EndsWith("s") && word.Length > 1 && word[word.Length - 2] != 'j' && IsVowel(word[word.Length - 2]) == false)
                 {
                     word = word.Remove(word.Length - 1);
                 }
@@ -180,7 +180,7 @@ namespace Annytab.Stemmer
 
             // Delete suffix e if in R1 and preceded by a non-vowel, and then undouble the ending
             bool ending_removed_step_2 = false;
-            if(strR1.EndsWith("e") == true && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
+            if (strR1.EndsWith("e") && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
             {
                 word = word.Remove(word.Length - 1);
                 ending_removed_step_2 = true;
@@ -197,12 +197,12 @@ namespace Annytab.Stemmer
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
             // (a) Delete heid if in R2 and not preceded by c, and treat a preceding en as in step 1(b)
-            if(strR2.EndsWith("heid") == true && word.Length > 4 && word[word.Length - 5] != 'c')
+            if (strR2.EndsWith("heid") && word.Length > 4 && word[word.Length - 5] != 'c')
             {
                 word = word.Remove(word.Length - 4);
 
                 // Delete en if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("enheid") == true && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("enheid") && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
                 {
                     word = word.Remove(word.Length - 2);
 
@@ -215,18 +215,18 @@ namespace Annytab.Stemmer
             strR1 = partIndexR[0] < word.Length ? word.Substring(partIndexR[0]) : "";
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
-            if(strR2.EndsWith("baar") == true)
+            if (strR2.EndsWith("baar"))
             {
                 // Delete if in R2
                 word = word.Remove(word.Length - 4);
             }
-            else if (strR2.EndsWith("lijk") == true)
+            else if (strR2.EndsWith("lijk"))
             {
                 // Delete if in R2, and then repeat step 2
                 word = word.Remove(word.Length - 4);
 
                 // Delete suffix e if in R1 and preceded by a non-vowel, and then undouble the ending
-                if (strR1.EndsWith("elijk") == true && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
+                if (strR1.EndsWith("elijk") && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
                 {
                     word = word.Remove(word.Length - 1);
 
@@ -234,15 +234,15 @@ namespace Annytab.Stemmer
                     word = UndoubleEnding(word);
                 }
             }
-            else if (strR2.EndsWith("bar") == true)
+            else if (strR2.EndsWith("bar"))
             {
                 // Delete if in R2 and if step 2 actually removed an e
-                if(ending_removed_step_2 == true)
+                if (ending_removed_step_2)
                 {
                     word = word.Remove(word.Length - 3);
                 }
             }
-            else if (strR2.EndsWith("end") == true || strR2.EndsWith("ing") == true)
+            else if (strR2.EndsWith("end") || strR2.EndsWith("ing"))
             {
                 // Delete if in R2
                 word = word.Remove(word.Length - 3);
@@ -251,7 +251,7 @@ namespace Annytab.Stemmer
                 strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
                 // If preceded by ig, delete if in R2 and not preceded by e, otherwise undouble the ending
-                if(strR2.EndsWith("ig") == true && word.EndsWith("eig") == false)
+                if (strR2.EndsWith("ig") && word.EndsWith("eig") == false)
                 {
                     word = word.Remove(word.Length - 2);
                 }
@@ -261,10 +261,10 @@ namespace Annytab.Stemmer
                     word = UndoubleEnding(word);
                 }
             }
-            else if (strR2.EndsWith("ig") == true)
+            else if (strR2.EndsWith("ig"))
             {
                 // Delete if in R2 and not preceded by e
-                if(word.EndsWith("eig") == false)
+                if (word.EndsWith("eig") == false)
                 {
                     word = word.Remove(word.Length - 2);
                 }
@@ -279,7 +279,7 @@ namespace Annytab.Stemmer
 
             // If the words ends CVD, where C is a non-vowel, D is a non-vowel other than I, and V is double a, e, o or u, 
             // remove one of the vowels from V (for example, maan -> man, brood -> brod).
-            if(word.Length > 3)
+            if (word.Length > 3)
             {
                 // Get CVD
                 char C = word[word.Length - 4];
@@ -316,7 +316,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -327,7 +327,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;
@@ -336,7 +336,7 @@ namespace Annytab.Stemmer
             }
 
             // Adjust R1
-            if(r1 < 3)
+            if (r1 < 3)
             {
                 r1 = 3;
             }

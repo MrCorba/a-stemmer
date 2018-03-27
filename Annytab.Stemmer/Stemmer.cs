@@ -86,16 +86,16 @@ namespace Annytab.Stemmer
             Int32 plusOneIndex = index + 1;
             Int32 minusOneIndex = index - 1;
 
-            if(index == 0 && characters.Length > 1)
+            if (index == 0 && characters.Length > 1)
             {
-                if (index == 0 && IsVowel(characters[index]) == true && IsVowel(characters[plusOneIndex]) == false)
+                if (index == 0 && IsVowel(characters[index]) && IsVowel(characters[plusOneIndex]) == false)
                 {
                     isShortSyllable = true;
                 }
             }
             else if (minusOneIndex > -1 && plusOneIndex < characters.Length)
             {
-                if (IsVowel(characters[index]) == true && IsVowel(characters[plusOneIndex]) == false && characters[plusOneIndex] != 'w' && characters[plusOneIndex] != 'x'
+                if (IsVowel(characters[index]) && IsVowel(characters[plusOneIndex]) == false && characters[plusOneIndex] != 'w' && characters[plusOneIndex] != 'x'
                     && characters[plusOneIndex] != 'Y' && IsVowel(characters[minusOneIndex]) == false)
                 {
                     isShortSyllable = true;
@@ -119,7 +119,7 @@ namespace Annytab.Stemmer
             bool isShortWord = false;
 
             // Check if the word is a short word
-            if (strR1 == "" && IsShortSyllable(word.ToCharArray(), word.Length - 2) == true)
+            if (strR1 == "" && IsShortSyllable(word.ToCharArray(), word.Length - 2))
             {
                 isShortWord = true;
             }

@@ -32,8 +32,8 @@ namespace Annytab.Stemmer
             this.vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'y', 'ä', 'ö' };
             this.endingsStep1 = new string[] { "kään", "kaan", "hän", "han", "kin", "pä", "pa", "kö", "ko" };
             this.endingsStep2 = new string[] { "nsa", "nsä", "mme", "nne", "si", "ni", "an", "än", "en" };
-            this.endingsStep3 = new string[] { "seen", "siin", "tten", "han", "hon", "lle", "ltä", "lta", "llä", 
-                "lla", "stä", "hin", "ssä", "ssa", "hen", "hän", "ttä", "tta", "hön", "ksi", "ine", "den", "sta", 
+            this.endingsStep3 = new string[] { "seen", "siin", "tten", "han", "hon", "lle", "ltä", "lta", "llä",
+                "lla", "stä", "hin", "ssä", "ssa", "hen", "hän", "ttä", "tta", "hön", "ksi", "ine", "den", "sta",
                 "nä", "tä", "ta", "na", "a", "ä", "n" };
             this.endingsStep4 = new string[] { "impi", "impä", "immi", "imma", "immä", "impa", "mpi", "eja", "mpa", "mpä", "mmi", "mma", "mmä", "ejä" };
             this.restrictedVowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'ä', 'ö' };
@@ -94,13 +94,13 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep1[i];
 
                 // Check if word ends with some of the predefined step 1 endings
-                if (word.EndsWith(end) == true)
+                if (word.EndsWith(end))
                 {
                     // Get the preceding character
                     char precedingChar = word.Length > end.Length ? word[word.Length - end.Length - 1] : '\0';
 
                     // Delete if in R1 and preceded by n, t or a vowel
-                    if(strR1.EndsWith(end) == true && (precedingChar == 'n' || precedingChar == 't' || IsVowel(precedingChar) == true))
+                    if (strR1.EndsWith(end) && (precedingChar == 'n' || precedingChar == 't' || IsVowel(precedingChar)))
                     {
                         word = word.Remove(word.Length - end.Length);
                         continue_step_1 = false;
@@ -116,7 +116,7 @@ namespace Annytab.Stemmer
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
             // (b)
-            if(continue_step_1 == true && strR2.EndsWith("sti") == true)
+            if (continue_step_1 && strR2.EndsWith("sti"))
             {
                 word = word.Remove(word.Length - 3);
             }
@@ -134,17 +134,17 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep2[i];
 
                 // Check if R1 ends with some of the predefined step 2 endings
-                if (strR1.EndsWith(end) == true)
+                if (strR1.EndsWith(end))
                 {
-                    if(end == "nsa" || end == "nsä" || end == "mme" || end == "nne") 
+                    if (end == "nsa" || end == "nsä" || end == "mme" || end == "nne")
                     {
                         // Delete
                         word = word.Remove(word.Length - end.Length);
                     }
-                    else if(end == "si")
+                    else if (end == "si")
                     {
                         // Delete if not preceded by k
-                        if(word.EndsWith("ksi") == false)
+                        if (word.EndsWith("ksi") == false)
                         {
                             word = word.Remove(word.Length - end.Length);
                         }
@@ -155,17 +155,17 @@ namespace Annytab.Stemmer
                         word = word.Remove(word.Length - end.Length);
 
                         // If preceded by kse, replace with ksi
-                        if(word.EndsWith("kse") == true)
+                        if (word.EndsWith("kse"))
                         {
-                            word = word.Remove(word.Length -1);
+                            word = word.Remove(word.Length - 1);
                             word += "i";
                         }
                     }
                     else if (end == "an")
                     {
                         // Delete if preceded by one of:   ta   ssa   sta   lla   lta   na
-                        if (word.EndsWith("taan") == true || word.EndsWith("ssaan") == true || word.EndsWith("staan") == true || word.EndsWith("llaan") == true
-                            || word.EndsWith("ltaan") == true || word.EndsWith("naan") == true)
+                        if (word.EndsWith("taan") || word.EndsWith("ssaan") || word.EndsWith("staan") || word.EndsWith("llaan")
+                            || word.EndsWith("ltaan") || word.EndsWith("naan"))
                         {
                             word = word.Remove(word.Length - end.Length);
                         }
@@ -173,8 +173,8 @@ namespace Annytab.Stemmer
                     else if (end == "än")
                     {
                         // Delete if preceded by one of:   tä   ssä   stä   llä   ltä   nä
-                        if (word.EndsWith("tään") == true || word.EndsWith("ssään") == true || word.EndsWith("stään") == true || word.EndsWith("llään") == true
-                            || word.EndsWith("ltään") == true || word.EndsWith("nään") == true)
+                        if (word.EndsWith("tään") || word.EndsWith("ssään") || word.EndsWith("stään") || word.EndsWith("llään")
+                            || word.EndsWith("ltään") || word.EndsWith("nään"))
                         {
                             word = word.Remove(word.Length - end.Length);
                         }
@@ -182,7 +182,7 @@ namespace Annytab.Stemmer
                     else if (end == "en")
                     {
                         // Delete if preceded by one of:   lle   ine
-                        if (word.EndsWith("lleen") == true || word.EndsWith("ineen") == true)
+                        if (word.EndsWith("lleen") || word.EndsWith("ineen"))
                         {
                             word = word.Remove(word.Length - end.Length);
                         }
@@ -207,7 +207,7 @@ namespace Annytab.Stemmer
                 string end = this.endingsStep3[i];
 
                 // Check if R1 ends with some of the predefined step 3 endings
-                if (strR1.EndsWith(end) == true)
+                if (strR1.EndsWith(end))
                 {
                     if (end == "han" || end == "hen" || end == "hin" || end == "hon" || end == "hän" || end == "hön")
                     {
@@ -217,20 +217,20 @@ namespace Annytab.Stemmer
                         string middleCharacter = end.Substring(1, 1);
 
                         // Delete if preceded by X, where X is a V other than u (a/han, e/hen etc)
-                        if(word.EndsWith(middleCharacter + end) == true)
+                        if (word.EndsWith(middleCharacter + end))
                         {
                             // Delete
                             word = word.Remove(word.Length - end.Length);
-                            
+
                         }
                     }
-                    else if (end == "siin" == true || end == "tten" == true || end == "den" == true)
+                    else if (end == "siin" || end == "tten" || end == "den")
                     {
                         // Get the preceding two letters
                         string precedingString = word.Length > (end.Length + 1) ? word.Substring(word.Length - end.Length - 2, 2) : "";
 
                         // Delete if preceded by Vi
-                        for(int j = 0; j < this.restrictedVowels.Length; j++)
+                        for (int j = 0; j < this.restrictedVowels.Length; j++)
                         {
                             if (precedingString == this.restrictedVowels[j].ToString() + "i")
                             {
@@ -264,7 +264,7 @@ namespace Annytab.Stemmer
                         char before2 = word.Length > 2 ? word[word.Length - 3] : '\0';
 
                         // Delete if preceded by cv
-                        if(word.Length > 2 && IsVowel(before2) == false && IsVowel(before1) == true)
+                        if (word.Length > 2 && IsVowel(before2) == false && IsVowel(before1))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_3 = true;
@@ -273,14 +273,14 @@ namespace Annytab.Stemmer
                     else if (end == "tta" || end == "ttä")
                     {
                         // Delete if preceded by e
-                        if(word.EndsWith("e" + end) == true)
+                        if (word.EndsWith("e" + end))
                         {
                             word = word.Remove(word.Length - end.Length);
                             ending_removed_step_3 = true;
                         }
                     }
-                    else if (end == "ta" || end == "tä" || end == "ssa" || end == "ssä" || end == "sta" || 
-                        end == "stä" || end == "lla" || end == "llä" || end == "lta" || end == "ltä" || 
+                    else if (end == "ta" || end == "tä" || end == "ssa" || end == "ssä" || end == "sta" ||
+                        end == "stä" || end == "lla" || end == "llä" || end == "lta" || end == "ltä" ||
                         end == "lle" || end == "na" || end == "nä" || end == "ksi" || end == "ine")
                     {
                         // Delete
@@ -294,9 +294,9 @@ namespace Annytab.Stemmer
                         ending_removed_step_3 = true;
 
                         // If preceded by LV or ie, delete the last vowel
-                        if(word.EndsWith("ie") == true)
+                        if (word.EndsWith("ie"))
                         {
-                            word = word.Remove(word.Length - 1);  
+                            word = word.Remove(word.Length - 1);
                         }
                         else
                         {
@@ -316,10 +316,10 @@ namespace Annytab.Stemmer
                 }
 
                 // Break out from the loop if a ending has been removed
-                if (ending_removed_step_3 == true)
+                if (ending_removed_step_3)
                 {
                     break;
-                }     
+                }
             }
             // **********************************************
 
@@ -334,17 +334,17 @@ namespace Annytab.Stemmer
                 // Get the ending
                 string end = this.endingsStep4[i];
 
-                if(strR2.EndsWith(end) == true)
+                if (strR2.EndsWith(end))
                 {
-                    if(end == "mpi" || end == "mpa" || end == "mpä" || end == "mmi" || end == "mma" || end == "mmä")
+                    if (end == "mpi" || end == "mpa" || end == "mpä" || end == "mmi" || end == "mma" || end == "mmä")
                     {
                         // Delete if not preceded by po
-                        if(word.EndsWith("po" + end) == false)
+                        if (word.EndsWith("po" + end) == false)
                         {
                             word = word.Remove(word.Length - end.Length);
                         }
                     }
-                    else if (end == "impi" || end == "impa" || end == "impä" || end == "immi" || end == "imma" || 
+                    else if (end == "impi" || end == "impa" || end == "impä" || end == "immi" || end == "imma" ||
                         end == "immä" || end == "eja" || end == "ejä")
                     {
                         // Delete
@@ -363,10 +363,10 @@ namespace Annytab.Stemmer
             strR1 = partIndexR[0] < word.Length ? word.Substring(partIndexR[0]) : "";
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
-            if (ending_removed_step_3 == true)
+            if (ending_removed_step_3)
             {
                 // If an ending was removed in step 3, delete a final i or j if in R1
-                if(strR1.EndsWith("i") == true || strR1.EndsWith("j") == true)
+                if (strR1.EndsWith("i") || strR1.EndsWith("j"))
                 {
                     word = word.Remove(word.Length - 1);
                 }
@@ -374,12 +374,12 @@ namespace Annytab.Stemmer
             else
             {
                 // Delete a final t in R1 if it follows a vowel
-                if(strR1.EndsWith("t") == true)
+                if (strR1.EndsWith("t"))
                 {
                     // Get the preceding char
                     char before = word.Length > 1 ? word[word.Length - 2] : '\0';
 
-                    if(IsVowel(before) == true)
+                    if (IsVowel(before))
                     {
                         word = word.Remove(word.Length - 1);
 
@@ -387,11 +387,11 @@ namespace Annytab.Stemmer
                         strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
                         // If a t is removed, delete a final mma or imma in R2, unless the mma is preceded by po
-                        if(strR2.EndsWith("imma") == true)
+                        if (strR2.EndsWith("imma"))
                         {
                             word = word.Remove(word.Length - 4);
                         }
-                        else if(strR2.EndsWith("mma") == true && word.EndsWith("poma") == false)
+                        else if (strR2.EndsWith("mma") && word.EndsWith("poma") == false)
                         {
                             word = word.Remove(word.Length - 3);
                         }
@@ -409,7 +409,7 @@ namespace Annytab.Stemmer
             // a) If R1 ends LV delete the last letter
             for (int i = 0; i < this.longVowels.Length; i++)
             {
-                if(strR1.EndsWith(this.longVowels[i]) == true )
+                if (strR1.EndsWith(this.longVowels[i]))
                 {
                     word = word.Remove(word.Length - 1);
                     break;
@@ -421,7 +421,7 @@ namespace Annytab.Stemmer
 
             // b) If R1 ends cX, c a consonant and X one of: a   ä   e   i, delete the last letter
             char c = strR1.Length > 1 ? strR1[strR1.Length - 2] : '\0';
-            if(c != '\0' && IsVowel(c) == false && (strR1.EndsWith("a") || strR1.EndsWith("ä") || strR1.EndsWith("e") || strR1.EndsWith("i")))
+            if (c != '\0' && IsVowel(c) == false && (strR1.EndsWith("a") || strR1.EndsWith("ä") || strR1.EndsWith("e") || strR1.EndsWith("i")))
             {
                 word = word.Remove(word.Length - 1);
             }
@@ -430,7 +430,7 @@ namespace Annytab.Stemmer
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
             // c) If R1 ends oj or uj delete the last letter
-            if(strR1.EndsWith("oj") == true || strR1.EndsWith("uj") == true)
+            if (strR1.EndsWith("oj") || strR1.EndsWith("uj"))
             {
                 word = word.Remove(word.Length - 1);
             }
@@ -439,7 +439,7 @@ namespace Annytab.Stemmer
             strR2 = partIndexR[1] < word.Length ? word.Substring(partIndexR[1]) : "";
 
             // d) If R1 ends jo delete the last letter
-            if (strR1.EndsWith("jo") == true)
+            if (strR1.EndsWith("jo"))
             {
                 word = word.Remove(word.Length - 1);
             }
@@ -449,23 +449,23 @@ namespace Annytab.Stemmer
             for (int i = startIndex; i > -1; i--)
             {
                 // Try to find a double consonant
-                if(i > 0 && word[i] == word[i-1] && IsVowel(word[i]) == false && IsVowel(word[i-1]) == false)
+                if (i > 0 && word[i] == word[i - 1] && IsVowel(word[i]) == false && IsVowel(word[i - 1]) == false)
                 {
                     // Get the count of characters that follows the double consonant
                     Int32 count = startIndex - i;
                     Int32 vowelCount = 0;
 
                     // Count the number of vowels
-                    for(int j = i; j < word.Length; j++)
+                    for (int j = i; j < word.Length; j++)
                     {
-                        if(IsVowel(word[j]) == true)
+                        if (IsVowel(word[j]))
                         {
                             vowelCount += 1;
                         }
                     }
 
                     // Remove the last consonant
-                    if(count == vowelCount)
+                    if (count == vowelCount)
                     {
                         word = word.Remove(i, 1);
                     }
@@ -499,7 +499,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -510,7 +510,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;

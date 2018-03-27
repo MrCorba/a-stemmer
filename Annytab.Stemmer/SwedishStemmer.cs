@@ -111,7 +111,7 @@ namespace Annytab.Stemmer
             }
 
             // Delete a s in the end if the s is preceded by a valid s-ending, 
-            if (continue_step_1 == true && part2.EndsWith("s") == true)
+            if (continue_step_1 && part2.EndsWith("s"))
             {
                 // Create a full string of part1 and part2
                 word = part1 + part2;
@@ -128,7 +128,7 @@ namespace Annytab.Stemmer
                         part2 = part2.Remove(part2.Length - 1);
                         break;
                     }
-                }   
+                }
             }
             // **********************************************
 
@@ -189,7 +189,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]) == true)
+                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
