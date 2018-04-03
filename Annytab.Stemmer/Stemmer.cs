@@ -48,6 +48,16 @@ namespace Annytab.Stemmer
         #region Helper methods
 
         /// <summary>
+        /// Check if a character is a consonant
+        /// </summary>
+        /// <param name="character">The character to check</param>
+        /// <returns>A boolean that indicates if the character is a vowel</returns>
+        public virtual bool IsConsonant(char character)
+        {
+            return !IsVowel(character);
+        }
+
+        /// <summary>
         /// Check if a character is a vowel
         /// </summary>
         /// <param name="character">The character to check</param>
@@ -88,15 +98,15 @@ namespace Annytab.Stemmer
 
             if (index == 0 && characters.Length > 1)
             {
-                if (index == 0 && IsVowel(characters[index]) && IsVowel(characters[plusOneIndex]) == false)
+                if (index == 0 && IsVowel(characters[index]) && IsConsonant(characters[plusOneIndex]))
                 {
                     isShortSyllable = true;
                 }
             }
             else if (minusOneIndex > -1 && plusOneIndex < characters.Length)
             {
-                if (IsVowel(characters[index]) && IsVowel(characters[plusOneIndex]) == false && characters[plusOneIndex] != 'w' && characters[plusOneIndex] != 'x'
-                    && characters[plusOneIndex] != 'Y' && IsVowel(characters[minusOneIndex]) == false)
+                if (IsVowel(characters[index]) && IsConsonant(characters[plusOneIndex]) && characters[plusOneIndex] != 'w' && characters[plusOneIndex] != 'x'
+                    && characters[plusOneIndex] != 'Y' && IsConsonant(characters[minusOneIndex]))
                 {
                     isShortSyllable = true;
                 }

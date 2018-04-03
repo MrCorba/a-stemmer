@@ -135,7 +135,7 @@ namespace Annytab.Stemmer
             else if (word.EndsWith("ene"))
             {
                 // Delete if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("ene") && word.Length > 3 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 4]) == false)
+                if (strR1.EndsWith("ene") && word.Length > 3 && word.EndsWith("gemene") == false && IsConsonant(word[word.Length - 4]))
                 {
                     word = word.Remove(word.Length - 3);
 
@@ -146,7 +146,7 @@ namespace Annytab.Stemmer
             else if (word.EndsWith("en"))
             {
                 // Delete if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("en") && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("en") && word.Length > 2 && word.EndsWith("gemene") == false && IsConsonant(word[word.Length - 3]))
                 {
                     word = word.Remove(word.Length - 2);
 
@@ -157,7 +157,7 @@ namespace Annytab.Stemmer
             else if (word.EndsWith("se"))
             {
                 // Delete if in R1 and preceded by a valid s-ending
-                if (strR1.EndsWith("se") && word.Length > 2 && word[word.Length - 3] != 'j' && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("se") && word.Length > 2 && word[word.Length - 3] != 'j' && IsConsonant(word[word.Length - 3]))
                 {
                     word = word.Remove(word.Length - 2);
                 }
@@ -165,7 +165,7 @@ namespace Annytab.Stemmer
             else if (word.EndsWith("s"))
             {
                 // Delete if in R1 and preceded by a valid s-ending
-                if (strR1.EndsWith("s") && word.Length > 1 && word[word.Length - 2] != 'j' && IsVowel(word[word.Length - 2]) == false)
+                if (strR1.EndsWith("s") && word.Length > 1 && word[word.Length - 2] != 'j' && IsConsonant(word[word.Length - 2]))
                 {
                     word = word.Remove(word.Length - 1);
                 }
@@ -180,7 +180,7 @@ namespace Annytab.Stemmer
 
             // Delete suffix e if in R1 and preceded by a non-vowel, and then undouble the ending
             bool ending_removed_step_2 = false;
-            if (strR1.EndsWith("e") && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
+            if (strR1.EndsWith("e") && word.Length > 1 && IsConsonant(word[word.Length - 2]))
             {
                 word = word.Remove(word.Length - 1);
                 ending_removed_step_2 = true;
@@ -202,7 +202,7 @@ namespace Annytab.Stemmer
                 word = word.Remove(word.Length - 4);
 
                 // Delete en if in R1 and preceded by a valid en-ending, and then undouble the ending
-                if (strR1.EndsWith("enheid") && word.Length > 2 && word.EndsWith("gemene") == false && IsVowel(word[word.Length - 3]) == false)
+                if (strR1.EndsWith("enheid") && word.Length > 2 && word.EndsWith("gemene") == false && IsConsonant(word[word.Length - 3]))
                 {
                     word = word.Remove(word.Length - 2);
 
@@ -226,7 +226,7 @@ namespace Annytab.Stemmer
                 word = word.Remove(word.Length - 4);
 
                 // Delete suffix e if in R1 and preceded by a non-vowel, and then undouble the ending
-                if (strR1.EndsWith("elijk") && word.Length > 1 && IsVowel(word[word.Length - 2]) == false)
+                if (strR1.EndsWith("elijk") && word.Length > 1 && IsConsonant(word[word.Length - 2]))
                 {
                     word = word.Remove(word.Length - 1);
 
@@ -286,7 +286,7 @@ namespace Annytab.Stemmer
                 string V = word.Substring(word.Length - 3, 2);
                 char D = word[word.Length - 1];
 
-                if (D != 'I' && IsVowel(C) == false && IsVowel(D) == false && (V == "aa" || V == "ee" || V == "oo" || V == "uu"))
+                if (D != 'I' && IsConsonant(C) && IsConsonant(D) && (V == "aa" || V == "ee" || V == "oo" || V == "uu"))
                 {
                     word = word.Remove(word.Length - 2, 1);
                 }
@@ -316,7 +316,7 @@ namespace Annytab.Stemmer
             // Calculate R1
             for (int i = 1; i < characters.Length; i++)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r1 index
                     r1 = i + 1;
@@ -327,7 +327,7 @@ namespace Annytab.Stemmer
             // Calculate R2
             for (int i = r1; i < characters.Length; ++i)
             {
-                if (IsVowel(characters[i]) == false && IsVowel(characters[i - 1]))
+                if (IsConsonant(characters[i]) && IsVowel(characters[i - 1]))
                 {
                     // Set the r2 index
                     r2 = i + 1;
